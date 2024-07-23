@@ -2,15 +2,10 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_resource_group" "gan_rg" {
-  name     = "Gan_Resource_Group"
-  location = "East US"
-}
-
 resource "azurerm_storage_account" "gan_storage" {
   name                     = "ganeshterraformdeployed"
-  resource_group_name      = azurerm_resource_group.gan_rg.name
-  location                 = azurerm_resource_group.gan_rg.location
+  resource_group_name      = "Gan_Resource_Group"  # Reference the existing resource group directly
+  location                 = "East US"
   account_tier             = "Standard"
   account_replication_type = "LRS"
 }
