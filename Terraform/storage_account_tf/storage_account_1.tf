@@ -2,16 +2,27 @@ provider "azurerm" {
   features {}
 }
 
-# Reference the existing resource group
-data "azurerm_resource_group" "existing" {
-  name = "Gan_Resource_Group"  # Name of the existing resource group
+resource "azurerm_resource_group" "gan_rg" {
+  name     = "Gan_Resource_Group"
+  location = "East US"
 }
 
-# Create a new storage account in the existing resource group
-resource "azurerm_storage_account" "existing_rg_storage" {
+resource "azurerm_storage_account" "gan_storage" {
   name                     = "ganeshterraformdeployed"
-  resource_group_name      = data.azurerm_resource_group.existing.name
-  location                 = data.azurerm_resource_group.existing.location  # Use the location of the existing resource group
+  resource_group_name      = azurerm_resource_group.gan_rg.name
+  location                 = azurerm_resource_group.gan_rg.location
   account_tier             = "Standard"
   account_replication_type = "LRS"
+}
+
+resource "azurerm_storage_container" "terraformcontainer1" {
+  name                  = "terraformcontainer1"
+  storage_account_name  = azurerm_storage_account.gan_storage.name
+  container_access_type = "private"
+}
+
+resource "azurerm_storage_container" "terraformcontainer2" {
+  name                  = "terraformcontainer2"
+  storage_account_name  = azurerm_storage_account.gan_storage.name
+  container_access_type = "private"
 }
