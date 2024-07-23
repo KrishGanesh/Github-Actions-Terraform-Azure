@@ -4,7 +4,7 @@ provider "azurerm" {
 
 resource "azurerm_storage_account" "gan_storage" {
   name                     = "ganeshterraformdeployed"
-  resource_group_name      = "Gan_Resource_Group"  # Reference the existing resource group directly
+  resource_group_name      = "Gan_Resource_Group"
   location                 = "East US"
   account_tier             = "Standard"
   account_replication_type = "LRS"
