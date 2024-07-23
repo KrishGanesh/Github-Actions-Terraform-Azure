@@ -2,22 +2,23 @@ provider "azurerm" {
   features {}
 }
 
-resource "azurerm_storage_account" "gan_storage" {
-  name                     = "ganeshterraformdeployed"
-  resource_group_name      = "Gan_Resource_Group"
-  location                 = "East US"
-  account_tier             = "Standard"
-  account_replication_type = "LRS"
+# Data block to reference the existing storage account
+data "azurerm_storage_account" "existing" {
+  name                = "ganeshterraformdeployed"
+  resource_group_name = "Gan_Resource_Group"
 }
 
-resource "azurerm_storage_container" "terraformcontainer1" {
-  name                  = "terraformcontainer1"
-  storage_account_name  = azurerm_storage_account.gan_storage.name
+# Define storage containers using the existing storage account
+resource "azurerm_storage_container" "container1" {
+  name                  = "mycontainer1"
+  storage_account_name  = data.azurerm_storage_account.existing.name
   container_access_type = "private"
 }
 
-resource "azurerm_storage_container" "terraformcontainer2" {
-  name                  = "terraformcontainer2"
-  storage_account_name  = azurerm_storage_account.gan_storage.name
+resource "azurerm_storage_container" "container2" {
+  name                  = "mycontainer2"
+  storage_account_name  = data.azurerm_storage_account.existing.name
   container_access_type = "private"
+}
+
 }
