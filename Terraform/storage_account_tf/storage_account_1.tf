@@ -1,5 +1,5 @@
 provider "azurerm" {
-  features {}
+  features {}  # Ensure this block is correctly closed
 }
 
 # Data block to reference the existing storage account
@@ -21,4 +21,3 @@ resource "azurerm_storage_container" "container2" {
   container_access_type = "private"
 }
 
-}
