@@ -1,4 +1,4 @@
-name: Import Azure Resources with Terraform : This is first step
+name: Import Azure Resources with Terraform
 
 on:
   workflow_dispatch:
@@ -31,5 +31,13 @@ jobs:
 
     - name: Terraform Import Storage Account
       run: |
-        terraform import azurerm_storage_account.gan_storage /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/Gan_Resource_Group/providers/Microsoft.Storage/storageAccounts/ganeshterraformdeployed
+        terraform import azurerm_storage_account.gan_storage /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/Gan_Resource_Group/providers/Microsoft.Storage/storageAccounts/ganeshterraformdeployed || echo "Resource already imported or not found"
+      working-directory: Terraform/storage_account_tf
+
+    - name: Terraform Plan
+      run: terraform plan
+      working-directory: Terraform/storage_account_tf
+
+    - name: Terraform Apply
+      run: terraform apply -auto-approve
       working-directory: Terraform/storage_account_tf
