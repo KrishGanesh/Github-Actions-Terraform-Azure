@@ -38,6 +38,7 @@ jobs:
       run: |
         terraform import azurerm_storage_container.container1 https://ganeshterraformdeployed.blob.core.windows.net/mycontainer1 || echo "Container mycontainer1 already imported or not found"
         terraform import azurerm_storage_container.container2 https://ganeshterraformdeployed.blob.core.windows.net/mycontainer2 || echo "Container mycontainer2 already imported or not found"
+        terraform import azurerm_storage_container.container3 https://ganeshterraformdeployed.blob.core.windows.net/mycontainer3 || echo "Container mycontainer3 already imported or not found"
       working-directory: Terraform/storage_account_tf
 
     - name: Terraform Plan
