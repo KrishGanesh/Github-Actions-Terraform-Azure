@@ -21,3 +21,10 @@ resource "azurerm_storage_container" "container2" {
   container_access_type = "private"
 }
 
+resource "azurerm_storage_container" "container2" {
+  name                  = "mycontainer3"
+  storage_account_name  = data.azurerm_storage_account.existing.name
+  container_access_type = "private"
+}
+
+
