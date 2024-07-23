@@ -1,4 +1,4 @@
-name: Import Azure Resources with Terraform
+name: Manage Azure Resources with Terraform
 
 on:
   workflow_dispatch:
@@ -10,7 +10,7 @@ env:
   ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
 
 jobs:
-  import:
+  manage:
     runs-on: ubuntu-latest
 
     steps:
