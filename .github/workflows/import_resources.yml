@@ -1,4 +1,4 @@
-name: Import Azure Resources with Terraform
+name: Import Azure Resources with Terraform : This is first step
 
 on:
   workflow_dispatch:
