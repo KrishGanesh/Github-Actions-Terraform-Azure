@@ -31,7 +31,13 @@ jobs:
 
     - name: Terraform Import Storage Account
       run: |
-        terraform import azurerm_storage_account.gan_storage /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/Gan_Resource_Group/providers/Microsoft.Storage/storageAccounts/ganeshterraformdeployed || echo "Resource already imported or not found"
+        terraform import azurerm_storage_account.gan_storage /subscriptions/${{ secrets.AZURE_SUBSCRIPTION_ID }}/resourceGroups/Gan_Resource_Group/providers/Microsoft.Storage/storageAccounts/ganeshterraformdeployed || echo "Storage account already imported or not found"
+      working-directory: Terraform/storage_account_tf
+
+    - name: Terraform Import Storage Containers
+      run: |
+        terraform import azurerm_storage_container.container1 https://ganeshterraformdeployed.blob.core.windows.net/mycontainer1 || echo "Container mycontainer1 already imported or not found"
+        terraform import azurerm_storage_container.container2 https://ganeshterraformdeployed.blob.core.windows.net/mycontainer2 || echo "Container mycontainer2 already imported or not found"
       working-directory: Terraform/storage_account_tf
 
     - name: Terraform Plan
